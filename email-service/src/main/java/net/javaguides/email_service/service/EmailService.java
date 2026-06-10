@@ -86,7 +86,7 @@ public class EmailService {
                             .append("</tr>");
 
                 } catch (Exception e) {
-                    logger.error("Error fetching product with ID {}: {}", item.getProductId(), e.getMessage());
+                    logger.error("Error retrieving product with ID {}: {}", item.getProductId(), e.getMessage());
                     // Optionally, you can continue or rethrow the exception based on requirements
                     continue;
                 }

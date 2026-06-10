@@ -121,7 +121,8 @@ public class EmailService {
             // helper.setFrom("your_email@gmail.com");
 
             // Send the email
-            mailSender.send(message);
+            //mailSender.send(message);
+            mailSender.sending(message);
             logger.info("Order confirmation email sent to {}", order.getEmail());
 
         } catch (Exception e) {

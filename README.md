@@ -112,30 +112,41 @@ Docker and Docker Compose are used to deploy and manage these components.
 
 ## 8. Architecture Flow
 
-Client
-   |
-   v
-API Gateway
-   |
-   +-------------------+
-   |        |          |
-   v        v          v
-Product   Order     Identity
-Service   Service    Service
-             |
-             v
-           Kafka
-             |
-       +-----+------+
-       |            |
-       v            v
-   Payment       Email
-   Service       Service
+The following diagram shows the major components and communication flow of the application:
 
-Eureka Service Registry is used for service discovery.
+```mermaid
+flowchart TD
+    A[User / Client] --> B[API Gateway]
 
-MySQL provides persistent storage and Redis provides caching/temporary
-storage.
+    B --> C[Product Service]
+    B --> D[Order Service]
+    B --> E[Identity Service]
+
+    D --> F[Apache Kafka]
+
+    F --> G[Payment Service]
+    F --> H[Email Service]
+
+    I[Eureka Service Registry]
+
+    C --> I
+    D --> I
+    E --> I
+    G --> I
+    H --> I
+
+    C --> J[(MySQL)]
+    D --> K[(MySQL)]
+    E --> L[(MySQL)]
+
+    C --> M[(Redis)]
+
+    N[Zipkin - Distributed Tracing]
+
+    C --> N
+    D --> N
+    G --> N
+```
 
 ## 9. Containerization
 
